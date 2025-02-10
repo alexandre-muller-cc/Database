@@ -70,7 +70,17 @@ CREATE TABLE ClubMember(
     `Family member SIN` VARCHAR(50) NOT NULL, 
     `Membership Status` ENUM('Active','Inactive'),
     PRIMARY KEY(MemberId)
-    )
+);
+
+CREATE TABLE Payment(
+    `Membership fee` INT DEFAULT 100,
+    MemberId INT,
+    `Payment Date` DATE,
+    `Amount of payment` INT, 
+    `Method of payment` ENUM('Cash','Debit','MasterCard'),
+    `Payment Deadline` DATE,
+    PRIMARY KEY(MemberId)
+);
 
 
 
