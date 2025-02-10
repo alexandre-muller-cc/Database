@@ -53,7 +53,23 @@ CREATE TABLE Family_Member (
 );
 
 CREATE TABLE ClubMember(
-    
+    MemberId INT AUTO_INCREMENT, 
+    `Age of registrtion` INT,
+    `First Name` VARCHAR(50), 
+    `Last Name` VARCHAR(50), 
+    `Date of Birth` DATE,
+    Height INT, 
+    Weight INT, 
+    SIN VARCHAR(50) NOT NULL,
+    `MEDICAR CART NUMBER` VARCHAR(50),
+    Phone_Number VARCHAR(12),
+    Address VARCHAR(50),
+    City VARCHAR(50),
+    Province VARCHAR(50),
+    Postal_Code VARCHAR(6),
+    `Family member SIN` VARCHAR(50) NOT NULL, 
+    `Membership Status` ENUM('Active','Inactive'),
+    PRIMARY KEY(MemberId)
     )
 
 
