@@ -68,7 +68,6 @@ CREATE TABLE ClubMember(
     Province VARCHAR(50),
     Postal_Code VARCHAR(7),
     `Family member SIN` VARCHAR(50) NOT NULL, 
-    `Membership Status` ENUM('Active','Inactive'),
     PRIMARY KEY(MemberId)
 );
 
@@ -155,7 +154,19 @@ VALUES
 (8, '2025-01-28', 100, 'Debit', '2025-12-31'),
 (9, '2025-02-01', 100, 'MasterCard', '2025-12-31'),
 (10, '2025-02-04', 50, 'Cash', '2025-12-31'),
+(11, '2025-02-06', 50, 'Cash', '2025-12-31'),
 (10, '2025-02-28', 50, 'Cash', '2025-12-31');
+
+-- Add the membership status on the clubmember databse based on the age 
+
+ALTER TABLE ClubMember
+ADD COLUMN `Membership Status` ENUM('Active', 'Inactive') 
+GENERATED ALWAYS AS (
+    CASE 
+        WHEN `Age of registrtion` BETWEEN 11 AND 18 THEN 'Active'
+        ELSE 'Inactive'
+    END
+) STORED;
 
 
 
@@ -195,17 +206,47 @@ CONCAT(`First Name`, ' ', `Last Name`) AS `GENERAL MANAGER FULLNAME`
 FROM Personnel
 WHERE role = 'General Manager'
 
+
 )
-SELECT Locations.Name,Locations.Postal_Code,Locations.Province,Locations.Phone_Number,Locations.Web_Address,Locations.type,
+SELECT Locations.Name,Locations.City,Locations.Postal_Code,Locations.Province,Locations.Phone_Number,Locations.Web_Address,Locations.type,
 TABLE1.NUMBER_OF_PERSONNEL,TABLE2.NUMBER_MEMBER,TABLE3.`GENERAL MANAGER FULLNAME`
 FROM Locations
 LEFT JOIN TABLE1 ON Locations.Name = TABLE1.Locations
 LEFT JOIN TABLE2 ON Locations.Name = TABLE2.Locations
 LEFT JOIN TABLE3 ON Locations.Name = TABLE3.Locations
+ORDER BY Province,City;
 
--- SELECT Locations.Name, TABLE2.NUMBER_MEMBER, TABLE1.NUMBER_OF_PERSONNEL
--- FROM TABLE1,TABLE2,Locations
--- WHERE Locations.Name = TABLE2.locations AND Locations.Name = TABLE3.locations;
+
+-- For a given location, provide a report that lists for every family member who is
+-- currently registered in the location, the number of related active club members.
+-- Information includes family members’ first name, last name, and the number of
+-- active club members that are associated with the family member.
+
+ -- Get active and Non active member per club
+ 
+WITH TABLE5 AS(
+ 
+ SELECT MemberId, 
+ SUM(`Amount of payment`) AS TOTAL_PAYMENT,
+ CASE 
+      WHEN SUM(`Amount of payment`)>=100 THEN 'ACTIVE' 
+      ELSE 'INACTIVE'
+  END AS STATUS 
+ FROM Payment
+  WHERE `Payment Date`<`Payment Deadline`
+ GROUP BY MemberId)
+
+
+SELECT *
+FROM ClubMember
+LEFT JOIN TABLE5 ON ClubMember.MemberId = TABLE5.MemberId;
+
+ 
+ 
+
+
+
+
 
 
 
