@@ -108,6 +108,7 @@ VALUES
 ('Michael', 'Green', '1998-08-08', '678912345', 'MB6789123456', '204-555-7777', '345 Portage Rd.', 'Winnipeg', 'MB', 'R3B 2A7', 'michael.green@gmail.com', 'Captain', 'Salaried', 'Quebec City Warriors', '2022-11-15', NULL),
 ('Sophie', 'Tremblay', '1987-04-12', '789123456', 'QC7891234567', '514-555-8888', '987 Crescent St.', 'Montreal', 'QC', 'H3A 1B2', 'sophie.tremblay@gmail.ca', 'Coach', 'Salaried', 'Edmonton Chargers', '2021-10-01', NULL),
 ('Olivier', 'Marchand', '1991-12-30', '890123456', 'ON8901234568', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.marchand@bell.net', 'Coach', 'Salaried', 'Halifax Highlanders', '2023-02-10', NULL),
+('Olivier', 'Marchand', '1991-12-30', '890123412', 'ON89012345AS', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.ALLO@bell.net', 'Coach', 'Salaried', 'Victoria Vikings', '2023-02-10', NULL),
 ('Chloe', 'Dubois', '1993-06-22', '901234567', 'BC9012345679', '250-555-0000', '654 Douglas St.', 'Victoria', 'BC', 'V8V 2N6', 'chloe.dubois@gmail.com', 'Coach', 'Salaried', 'Calgary Rovers', '2020-12-12', '2024-05-31');
 
 
@@ -170,6 +171,7 @@ General manager Name ?
 
 Create a table Table 1 about the number of personnel per club */
 
+
 WITH TABLE1 AS (
   SELECT Locations,
   COUNT(*) AS NUMBER_OF_PERSONNEL
@@ -180,14 +182,31 @@ WITH TABLE1 AS (
 -- Since the member table do not indique the club, we use the Family table to link it with the location 
 
 TABLE2 AS (
-SELECT SUBQUERY.locations, COUNT(*)
+SELECT SUBQUERY.locations AS Locations, COUNT(*) AS NUMBER_MEMBER
 FROM(
 SELECT ClubMember.`First Name`, Family_Member.locations
 FROM Family_Member, ClubMember
 WHERE Family_Member.SIN = ClubMember.`Family member SIN`) AS SUBQUERY
-GROUP BY SUBQUERY.locations)
+GROUP BY SUBQUERY.locations),
 
-SELECT * FROM TABLE1;
+TABLE3 AS (
+SELECT Locations,
+CONCAT(`First Name`, ' ', `Last Name`) AS `GENERAL MANAGER FULLNAME`
+FROM Personnel
+WHERE role = 'General Manager'
+
+)
+SELECT Locations.Name,Locations.Postal_Code,Locations.Province,Locations.Phone_Number,Locations.Web_Address,Locations.type,
+TABLE1.NUMBER_OF_PERSONNEL,TABLE2.NUMBER_MEMBER,TABLE3.`GENERAL MANAGER FULLNAME`
+FROM Locations
+LEFT JOIN TABLE1 ON Locations.Name = TABLE1.Locations
+LEFT JOIN TABLE2 ON Locations.Name = TABLE2.Locations
+LEFT JOIN TABLE3 ON Locations.Name = TABLE3.Locations
+
+-- SELECT Locations.Name, TABLE2.NUMBER_MEMBER, TABLE1.NUMBER_OF_PERSONNEL
+-- FROM TABLE1,TABLE2,Locations
+-- WHERE Locations.Name = TABLE2.locations AND Locations.Name = TABLE3.locations;
+
 
 
 
@@ -202,12 +221,3 @@ SELECT * FROM TABLE1;
 -- FROM ClubMember
 -- GROUP BY Locations
 -- );
-
-
-
-
-
-
-
-
-
