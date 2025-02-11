@@ -138,6 +138,7 @@ VALUES
 (14, 'James', 'Reynolds', '1997-10-04', 178, 70, '988986787', 'MB6666666666', '204-555-4321', '345 Portage Rd.', 'Winnipeg', 'MB', 'R3B 2A7', '678912345'),
 (13, 'Emma', 'Carter', '1989-01-12', 168, 62, '879456865', 'QC7777777777', '514-555-9870', '987 Crescent St.', 'Montreal', 'QC', 'H3A 1B2', '789123456'),
 (12, 'Alexander', 'Brooks', '1990-12-20', 183, 85, '989554324', 'ON8888888888', '613-555-3456', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', '890123456'),
+(12, 'Timmy', 'Brooks', '1992-12-20', 183, 85, '989554324', 'ON8888888888', '613-555-3456', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', '890123456'),
 (11, 'Sophie', 'Parker', '1993-06-22', 164, 56, '345678905', 'BC9999999999', '250-555-6789', '654 Douglas St.', 'Victoria', 'BC', 'V8V 2N6', '901234567');
 
 INSERT INTO Payment 
@@ -154,6 +155,57 @@ VALUES
 (9, '2025-02-01', 100, 'MasterCard', '2025-12-31'),
 (10, '2025-02-04', 50, 'Cash', '2025-12-31'),
 (10, '2025-02-28', 50, 'Cash', '2025-12-31');
+
+
+
+
+/*Get complete details for every location in the system. Details include address, city,
+province, postal code, phone number, web address, type (Head, Branch), capacity,
+general manager name, number of personnel, and the number of club members
+associated with that location. The results should be displayed sorted in ascending
+order by Province, then by city.
+
+General manager Name ? 
+
+
+Create a table Table 1 about the number of personnel per club */
+
+WITH TABLE1 AS (
+  SELECT Locations,
+  COUNT(*) AS NUMBER_OF_PERSONNEL
+  FROM Personnel
+  GROUP BY Locations
+),
+
+-- Since the member table do not indique the club, we use the Family table to link it with the location 
+
+TABLE2 AS (
+SELECT SUBQUERY.locations, COUNT(*)
+FROM(
+SELECT ClubMember.`First Name`, Family_Member.locations
+FROM Family_Member, ClubMember
+WHERE Family_Member.SIN = ClubMember.`Family member SIN`) AS SUBQUERY
+GROUP BY SUBQUERY.locations)
+
+SELECT * FROM TABLE1;
+
+
+
+
+
+
+-- Create a table with the number of member 
+
+-- TABLE2 AS (
+-- SELECT Locations,
+-- COUNT(*) AS NUMBER_OF_Member
+-- FROM ClubMember
+-- GROUP BY Locations
+-- );
+
+
+
+
 
 
 
