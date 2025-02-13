@@ -250,11 +250,36 @@ GROUP BY Locations,Family_Member.`First Name`, Family_Member.`Last Name`;
 
 
 
+-- For a given location, provide a report that displays information about the personnel
+-- who are currently operating in that location. The information includes first-name,
+-- last-name, date of birth, Social Security Number, Medicare card number, telephone
+-- number, address, city, province, postal code, email address, role (General manager,
+-- deputy manager, Coach, etc.) and mandate (Volunteer or Salaried)
+
+
+SELECT Locations,
+`First Name`, 
+`Last Name`, `Date of Birth`,
+SIN,
+`MEDICAR CART NUMBER`,
+Phone_Number,
+Address, City,
+Province,
+Postal_Code,
+email,
+role,
+mandate
+FROM personnel
+WHERE Locations = "Montreal Soccer Club";
+
  
- 
 
 
-
+-- Get a detailed list of all club members registered in the system. The list should
+-- include the location name that the club member that is currently associated with,
+-- the membership number of the club member, first-name, last-name, age, city,
+-- province, and status (active or inactive). The results should be displayed sorted in
+-- ascending order by location name, then by age.
 
 
 
