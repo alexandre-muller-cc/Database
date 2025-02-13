@@ -234,12 +234,21 @@ WITH TABLE5 AS(
   END AS STATUS 
  FROM Payment
   WHERE `Payment Date`<`Payment Deadline`
- GROUP BY MemberId)
+ GROUP BY MemberId),
 
+TABLE6 AS (
 
-SELECT *
+SELECT `Family member SIN`, `Membership Status`, STATUS
 FROM ClubMember
-LEFT JOIN TABLE5 ON ClubMember.MemberId = TABLE5.MemberId;
+LEFT JOIN TABLE5 ON ClubMember.MemberId = TABLE5.MemberId)
+
+
+SELECT Family_Member.Locations,Family_Member.`First Name`, Family_Member.`Last Name`, count(STATUS) as `ACTIVE CLUB MEMBER`
+from Family_Member
+LEFT JOIN TABLE6 ON Family_Member.SIN = TABLE6.`Family member SIN`
+GROUP BY Locations,Family_Member.`First Name`, Family_Member.`Last Name`;
+
+
 
  
  
