@@ -54,7 +54,7 @@ CREATE TABLE Family_Member (
 
 CREATE TABLE ClubMember(
     MemberId INT AUTO_INCREMENT, 
-    `Age of registrtion` INT,
+    `Age of registration` INT,
     `First Name` VARCHAR(50), 
     `Last Name` VARCHAR(50), 
     `Date of Birth` DATE,
@@ -127,7 +127,7 @@ VALUES
 
 
 INSERT INTO ClubMember 
-(`Age of registrtion`, `First Name`, `Last Name`, `Date of Birth`, Height, Weight, SIN, `MEDICAR CART NUMBER`, Phone_Number, Address, City, Province, Postal_Code, `Family member SIN`)
+(`Age of registration`, `First Name`, `Last Name`, `Date of Birth`, Height, Weight, SIN, `MEDICAR CART NUMBER`, Phone_Number, Address, City, Province, Postal_Code, `Family member SIN`)
 VALUES 
 (11, 'Ethan', 'Cooper', '1996-05-03', 180, 75, '233232324', 'QC0000000001', '514-555-9876', '100 Pine St.', 'Montreal', 'QC', 'H3A 1B2', '123456789'),
 (12, 'Amelia', 'Scott', '1994-08-19', 170, 60, '234335343', 'ON1111111111', '416-555-1234', '456 Elm Ave.', 'Toronto', 'ON', 'M5V 2B6', '987654321'),
@@ -163,7 +163,7 @@ ALTER TABLE ClubMember
 ADD COLUMN `Membership Status` ENUM('Active', 'Inactive') 
 GENERATED ALWAYS AS (
     CASE 
-        WHEN `Age of registrtion` BETWEEN 11 AND 18 THEN 'Active'
+        WHEN `Age of registration` BETWEEN 11 AND 18 THEN 'Active'
         ELSE 'Inactive'
     END
 ) STORED;
@@ -224,7 +224,7 @@ ORDER BY Province,City;
 
  -- Get active and Non active member per club
  
-WITH TABLE5 AS(
+Create TABLE TABLE5 AS(
  
  SELECT MemberId, 
  SUM(`Amount of payment`) AS TOTAL_PAYMENT,
@@ -234,9 +234,10 @@ WITH TABLE5 AS(
   END AS STATUS 
  FROM Payment
   WHERE `Payment Date`<`Payment Deadline`
- GROUP BY MemberId),
-
-TABLE6 AS (
+ GROUP BY MemberId);
+ 
+ 
+WITH TABLE6 AS (
 
 SELECT `Family member SIN`, `Membership Status`, STATUS
 FROM ClubMember
@@ -280,6 +281,32 @@ WHERE Locations = "Montreal Soccer Club";
 -- the membership number of the club member, first-name, last-name, age, city,
 -- province, and status (active or inactive). The results should be displayed sorted in
 -- ascending order by location name, then by age.
+
+ -- Create a temporary table with family SIN and Location of the club
+ 
+WITH TABLE7 AS (
+
+SELECT SIN, Locations
+FROM Family_Member
+GROUP BY SIN, Locations
+)
+
+
+SELECT TABLE7.Locations, ClubMember.`MemberId`, ClubMember.`First Name`, ClubMember.`Last Name`,
+ClubMember.`Age of registration`,ClubMember.city, ClubMember.province,TABLE5.Status
+FROM ClubMember
+LEFT JOIN TABLE7 ON ClubMember.`Family member SIN`  = TABLE7.SIN
+LEFT JOIN TABLE5 ON ClubMember.MemberId  = TABLE5.MemberId
+ORDER BY Locations,`First Name`, `Age of registration`;
+
+
+-- For a given family member, get details of all club members associated with him/her.
+-- Information includes club membership number, first-name, last-name, date of birth,
+-- Social Security Number, Medicare card number, telephone number, address, city,
+-- province, postal code, relationship with the family member, and status (active or
+-- inactive).
+
+
 
 
 
