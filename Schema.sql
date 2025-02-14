@@ -99,16 +99,16 @@ INSERT INTO Personnel
 (`First Name`, `Last Name`, `Date of Birth`, SIN, `MEDICAR CART NUMBER`, Phone_Number, Address, City, Province, Postal_Code, email, Role, Mandate, Locations, `Start of operation`, `End of operation`)
 VALUES 
 ('Noah', 'Sullivan', '1985-03-21', '123456789', 'QC1234567890', '514-555-1111', '111 Maple St.', 'Montreal', 'QC', 'H3A 1B2', 'noah.sullivan@email.com', 'General Manager', 'Salaried', 'Montreal Soccer Club', '2021-01-10', NULL),
-('Sarah', 'Lee', '1992-07-15', '987654321', 'ON9876543211', '416-555-2222', '456 Park Ave.', 'Toronto', 'ON', 'M5V 2B6', 'sarah.lee@yahoo.com', 'Captain', 'Salaried', 'Winnipeg Warriors', '2022-06-01', NULL),
-('Pierre', 'Dupont', '1990-09-10', '234567891', 'QC2345678912', '418-555-3333', '789 Laurier Blvd.', 'Quebec City', 'QC', 'G1R 2H4', 'pierre.dupont@hotmail.fr', 'Treasurer', 'Salaried', 'Montreal Soccer Club', '2023-04-15', NULL),
-('Emily', 'Wong', '1988-11-25', '345678912', 'BC3456789123', '604-555-4444', '222 Main St.', 'Vancouver', 'BC', 'V6Z 1C5', 'emily.wong@outlook.com', 'Coach', 'Salaried', 'Toronto United FC', '2020-09-12', '2024-12-31'),
-('Ahmed', 'Khan', '1995-02-05', '456789123', 'NS4567891234', '902-555-5555', '678 Spring St.', 'Halifax', 'NS', 'B3J 3R4', 'ahmed.khan@gmail.com', 'Captain', 'Volunteer', 'Vancouver Strikers', '2023-01-10', NULL),
-('Jessica', 'Brown', '1983-05-14', '567891234', 'AB5678912345', '403-555-6666', '123 Calgary Ave.', 'Calgary', 'AB', 'T2P 0X3', 'jessica.brown@live.ca', 'Captain', 'Volunteer', 'Ottawa Fury FC', '2021-05-01', NULL),
-('Michael', 'Green', '1998-08-08', '678912345', 'MB6789123456', '204-555-7777', '345 Portage Rd.', 'Winnipeg', 'MB', 'R3B 2A7', 'michael.green@gmail.com', 'Captain', 'Salaried', 'Quebec City Warriors', '2022-11-15', NULL),
-('Sophie', 'Tremblay', '1987-04-12', '789123456', 'QC7891234567', '514-555-8888', '987 Crescent St.', 'Montreal', 'QC', 'H3A 1B2', 'sophie.tremblay@gmail.ca', 'Coach', 'Salaried', 'Edmonton Chargers', '2021-10-01', NULL),
-('Olivier', 'Marchand', '1991-12-30', '890123456', 'ON8901234568', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.marchand@bell.net', 'Coach', 'Salaried', 'Halifax Highlanders', '2023-02-10', NULL),
-('Olivier', 'Marchand', '1991-12-30', '890123412', 'ON89012345AS', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.ALLO@bell.net', 'Coach', 'Salaried', 'Victoria Vikings', '2023-02-10', NULL),
-('Chloe', 'Dubois', '1993-06-22', '901234567', 'BC9012345679', '250-555-0000', '654 Douglas St.', 'Victoria', 'BC', 'V8V 2N6', 'chloe.dubois@gmail.com', 'Coach', 'Salaried', 'Calgary Rovers', '2020-12-12', '2024-05-31');
+('Sarah', 'Lee', '1992-07-15', '9834242321', 'ON9876543211', '416-555-2222', '456 Park Ave.', 'Toronto', 'ON', 'M5V 2B6', 'sarah.lee@yahoo.com', 'Captain', 'Salaried', 'Winnipeg Warriors', '2022-06-01', NULL),
+('Pierre', 'Dupont', '1990-09-10', '23655347891', 'QC2345678912', '418-555-3333', '789 Laurier Blvd.', 'Quebec City', 'QC', 'G1R 2H4', 'pierre.dupont@hotmail.fr', 'Treasurer', 'Salaried', 'Montreal Soccer Club', '2023-04-15', NULL),
+('Emily', 'Wong', '1988-11-25', '342328912', 'BC3456789123', '604-555-4444', '222 Main St.', 'Vancouver', 'BC', 'V6Z 1C5', 'emily.wong@outlook.com', 'Coach', 'Salaried', 'Toronto United FC', '2020-09-12', '2024-12-31'),
+('Ahmed', 'Khan', '1995-02-05', '4569765123', 'NS4567891234', '902-555-5555', '678 Spring St.', 'Halifax', 'NS', 'B3J 3R4', 'ahmed.khan@gmail.com', 'Captain', 'Volunteer', 'Vancouver Strikers', '2023-01-10', NULL),
+('Jessica', 'Brown', '1983-05-14', '5135491234', 'AB5678912345', '403-555-6666', '123 Calgary Ave.', 'Calgary', 'AB', 'T2P 0X3', 'jessica.brown@live.ca', 'Captain', 'Volunteer', 'Ottawa Fury FC', '2021-05-01', NULL),
+('Michael', 'Green', '1998-08-08', '67212345', 'MB6789123456', '204-555-7777', '345 Portage Rd.', 'Winnipeg', 'MB', 'R3B 2A7', 'michael.green@gmail.com', 'Captain', 'Salaried', 'Quebec City Warriors', '2022-11-15', NULL),
+('Sophie', 'Tremblay', '1987-04-12', '78914235','QC7891234567', '514-555-8888', '987 Crescent St.', 'Montreal', 'QC', 'H3A 1B2', 'sophie.tremblay@gmail.ca', 'Coach', 'Salaried', 'Edmonton Chargers', '2021-10-01', NULL),
+('Olivier', 'Marchand', '1991-12-30', '89012356','N8901234568', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.marchand@bell.net', 'Coach', 'Salaried', 'Halifax Highlanders', '2020-09-12', '2024-12-31'),
+('Olivier', 'Marchand', '1991-12-30', '452345232', 'ON89012345AS', '613-555-9999', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', 'olivier.ALLO@bell.net', 'Coach', 'Salaried', 'Victoria Vikings', '2023-02-10', NULL),
+('Chloe', 'Dubois', '1993-06-22', '232435234', 'BC9012345679', '250-555-0000', '654 Douglas St.', 'Victoria', 'BC', 'V8V 2N6', 'chloe.dubois@gmail.com', 'Coach', 'Salaried', 'Calgary Rovers', '2020-12-12', '2024-05-31');
 
 
 INSERT INTO Family_Member 
@@ -320,7 +320,7 @@ LEFT JOIN ClubMember ON Family_Member.SIN = ClubMember.`Family member SIN`;
 -- the same location. Information includes first-name, last-name, and phone number
 -- of the family member.
 
--- USE TABLE5 AND MERGE IT TO GET THE FAMALY SIN MEMBER 
+-- USE TABLE5 AND MERGE IT TO GET THE FAMILY SIN MEMBER 
 
 WITH TABLE8 AS (
 
@@ -330,16 +330,13 @@ LEFT JOIN ClubMember ON TABLE5.MemberId = ClubMember.MemberId
 )
 
 
---NOT GOOD TO SOLVE 
-SELECT * 
-FROM 
-(
-SELECT * 
-FROM Family_Member
-LEFT JOIN TABLE8 ON Family_Member.SIN = TABLE8.`Family member SIN`
-) as subquery
-LEFT JOIN personnel ON subquery.SIN = personnel.SIN;
-
+SELECT SUBQUERY.`First Name`, SUBQUERY.`Last Name`,SUBQUERY.`Phone_Number`, personnel.Locations
+FROM (
+    SELECT * 
+    FROM Family_Member
+    LEFT JOIN TABLE8 ON Family_Member.SIN = TABLE8.`Family member SIN`
+) AS SUBQUERY
+INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN
 
 
 
