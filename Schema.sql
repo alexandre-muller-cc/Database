@@ -98,7 +98,7 @@ VALUES
 INSERT INTO Personnel 
 (`First Name`, `Last Name`, `Date of Birth`, SIN, `MEDICAR CART NUMBER`, Phone_Number, Address, City, Province, Postal_Code, email, Role, Mandate, Locations, `Start of operation`, `End of operation`)
 VALUES 
-('John', 'Smith', '1985-03-21', '123456789', 'QC1234567890', '514-555-1111', '111 Maple St.', 'Montreal', 'QC', 'H3A 1B2', 'john.smith@gmail.com', 'General Manager', 'Salaried', 'Montreal Soccer Club', '2021-01-10', NULL),
+('Noah', 'Sullivan', '1985-03-21', '123456789', 'QC1234567890', '514-555-1111', '111 Maple St.', 'Montreal', 'QC', 'H3A 1B2', 'noah.sullivan@email.com', 'General Manager', 'Salaried', 'Montreal Soccer Club', '2021-01-10', NULL),
 ('Sarah', 'Lee', '1992-07-15', '987654321', 'ON9876543211', '416-555-2222', '456 Park Ave.', 'Toronto', 'ON', 'M5V 2B6', 'sarah.lee@yahoo.com', 'Captain', 'Salaried', 'Winnipeg Warriors', '2022-06-01', NULL),
 ('Pierre', 'Dupont', '1990-09-10', '234567891', 'QC2345678912', '418-555-3333', '789 Laurier Blvd.', 'Quebec City', 'QC', 'G1R 2H4', 'pierre.dupont@hotmail.fr', 'Treasurer', 'Salaried', 'Montreal Soccer Club', '2023-04-15', NULL),
 ('Emily', 'Wong', '1988-11-25', '345678912', 'BC3456789123', '604-555-4444', '222 Main St.', 'Vancouver', 'BC', 'V6Z 1C5', 'emily.wong@outlook.com', 'Coach', 'Salaried', 'Toronto United FC', '2020-09-12', '2024-12-31'),
@@ -319,6 +319,28 @@ LEFT JOIN ClubMember ON Family_Member.SIN = ClubMember.`Family member SIN`;
 -- club members associated with them and are also an operator personnel member for
 -- the same location. Information includes first-name, last-name, and phone number
 -- of the family member.
+
+-- USE TABLE5 AND MERGE IT TO GET THE FAMALY SIN MEMBER 
+
+WITH TABLE8 AS (
+
+SELECT TABLE5.MemberId, TABLE5.STATUS, ClubMember.`Family member SIN`
+FROM TABLE5
+LEFT JOIN ClubMember ON TABLE5.MemberId = ClubMember.MemberId
+)
+
+
+--NOT GOOD TO SOLVE 
+SELECT * 
+FROM 
+(
+SELECT * 
+FROM Family_Member
+LEFT JOIN TABLE8 ON Family_Member.SIN = TABLE8.`Family member SIN`
+) as subquery
+LEFT JOIN personnel ON subquery.SIN = personnel.SIN;
+
+
 
 
 
