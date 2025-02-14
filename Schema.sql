@@ -138,7 +138,7 @@ VALUES
 (14, 'James', 'Reynolds', '1997-10-04', 178, 70, '988986787', 'MB6666666666', '204-555-4321', '345 Portage Rd.', 'Winnipeg', 'MB', 'R3B 2A7', '678912345'),
 (13, 'Emma', 'Carter', '1989-01-12', 168, 62, '879456865', 'QC7777777777', '514-555-9870', '987 Crescent St.', 'Montreal', 'QC', 'H3A 1B2', '789123456'),
 (12, 'Alexander', 'Brooks', '1990-12-20', 183, 85, '989554324', 'ON8888888888', '613-555-3456', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', '890123456'),
-(12, 'Timmy', 'Brooks', '1992-12-20', 183, 85, '989554324', 'ON8888888888', '613-555-3456', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', '890123456'),
+(12, 'Timmy', 'Brooks', '1992-12-20', 183, 85, '989565324', 'ON8888881288', '613-555-3456', '123 Rideau St.', 'Ottawa', 'ON', 'K1P 1J1', '890123456'),
 (11, 'Sophie', 'Parker', '1993-06-22', 164, 56, '345678905', 'BC9999999999', '250-555-6789', '654 Douglas St.', 'Victoria', 'BC', 'V8V 2N6', '901234567');
 
 INSERT INTO Payment 
@@ -305,6 +305,50 @@ ORDER BY Locations,`First Name`, `Age of registration`;
 -- Social Security Number, Medicare card number, telephone number, address, city,
 -- province, postal code, relationship with the family member, and status (active or
 -- inactive).
+
+
+-- We will do for all of them 
+
+SELECT ClubMember.MemberId, ClubMember.`First Name`, ClubMember.`Last Name`, ClubMember.`Date of Birth`, ClubMember.SIN, ClubMember.`MEDICAR CART NUMBER`,
+ClubMember.Phone_Number,ClubMember.address, ClubMember.city, ClubMember.province, ClubMember.Postal_Code, Family_Member.relationship
+FROM Family_Member
+LEFT JOIN ClubMember ON Family_Member.SIN = ClubMember.`Family member SIN`;
+
+
+-- For a given location, get the list of all family members who have currently active
+-- club members associated with them and are also an operator personnel member for
+-- the same location. Information includes first-name, last-name, and phone number
+-- of the family member.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
