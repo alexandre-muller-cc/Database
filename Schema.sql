@@ -336,13 +336,20 @@ FROM (
     FROM Family_Member
     LEFT JOIN TABLE8 ON Family_Member.SIN = TABLE8.`Family member SIN`
 ) AS SUBQUERY
-INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN
+INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN;
 
 
 
 
 
+-- For a given club member, give details of all payments for the membership fees.
+-- Information includes date of payment, amount of payment, and year of payment.
+-- The results should be displayed sorted in ascending order by date.
 
+SELECT Clubmember.`First Name`,Clubmember.`Last Name`, payment.`Payment Date`, payment.`Amount of payment`, YEAR(`Payment Date`) AS `Year of Payement`
+FROM payment
+LEFT JOIN ClubMember on payment.MemberId = ClubMember.MemberId
+WHERE payment.MemberId = 10;
 
 
 
