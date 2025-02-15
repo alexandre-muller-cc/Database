@@ -368,8 +368,19 @@ FROM(
   FROM Payment
   GROUP BY MemberId, YEAR(`Payment Date`)) as Subquery
 GROUP BY Subquery.`Year`;
-  
-  
+
+
+-- QUESTION  5
+-- For each relation R created in your database, report the result of the following
+-- SQL statement:
+-- SELECT COUNT(*) FROM R;
+
+
+SELECT COUNT(*) AS `Count for locations schema` FROM Locations ; 
+SELECT COUNT(*) AS `Count for Personnel schema`FROM Personnel ; 
+SELECT COUNT(*) AS `Count for Family_member schema` FROM Family_Member ; 
+SELECT COUNT(*) AS `Count for ClubMember schema` FROM ClubMember ; 
+SELECT COUNT(*) AS `Count for Payment schema` FROM Payment ; 
 
 
 
