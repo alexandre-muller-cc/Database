@@ -144,18 +144,22 @@ VALUES
 INSERT INTO Payment 
 (MemberId, `Payment Date`, `Amount of payment`, `Method of payment`, `Payment Deadline`)
 VALUES
-(1, '2025-01-05', 100, 'MasterCard', '2025-12-31'),
-(2, '2025-01-08', 100, 'Debit', '2025-12-31'),
-(3, '2025-01-12', 100, 'MasterCard', '2025-12-31'),
-(4, '2025-01-15', 100, 'MasterCard', '2025-12-31'),
-(5, '2025-01-18', 100, 'Cash', '2025-12-31'),
-(6, '2025-01-21', 100, 'MasterCard', '2025-12-31'),
-(7, '2025-01-25', 100, 'MasterCard', '2025-12-31'),
-(8, '2025-01-28', 100, 'Debit', '2025-12-31'),
-(9, '2025-02-01', 100, 'MasterCard', '2025-12-31'),
-(10, '2025-02-04', 50, 'Cash', '2025-12-31'),
-(11, '2025-02-06', 50, 'Cash', '2025-12-31'),
-(10, '2025-02-28', 50, 'Cash', '2025-12-31');
+(1, '2024-01-05', 100, 'MasterCard', '2024-12-31'),
+(2, '2024-01-08', 100, 'Debit', '2024-12-31'),
+(3, '2024-01-12', 100, 'MasterCard', '2024-12-31'),
+(4, '2024-01-15', 100, 'MasterCard', '2024-12-31'),
+(5, '2024-01-18', 100, 'Cash', '2024-12-31'),
+(6, '2024-01-21', 100, 'MasterCard', '2024-12-31'),
+(6, '2024-01-25', 91, 'MasterCard', '2024-12-31'),
+(7, '2024-01-25', 100, 'MasterCard', '2024-12-31'),
+(8, '2024-01-28', 100, 'Debit', '2024-12-31'),
+(9, '2024-02-01', 100, 'MasterCard', '2024-12-31'),
+(9, '2024-02-11', 100, 'MasterCard', '2024-12-31'),
+(9, '2024-02-14', 100, 'MasterCard', '2024-12-31'),
+(9, '2024-03-01', 100, 'Cash', '2024-12-31'),
+(10, '2024-02-04', 50, 'Cash', '2024-12-31'),
+(11, '2024-02-06', 50, 'Cash', '2024-12-31'),
+(10, '2024-02-28', 50, 'Cash', '2024-12-31');
 
 -- Add the membership status on the clubmember databse based on the age 
 
@@ -346,14 +350,35 @@ INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN;
 -- Information includes date of payment, amount of payment, and year of payment.
 -- The results should be displayed sorted in ascending order by date.
 
-SELECT Clubmember.`First Name`,Clubmember.`Last Name`, payment.`Payment Date`, payment.`Amount of payment`, YEAR(`Payment Date`) AS `Year of Payement`
+SELECT Clubmember.`First Name`,Clubmember.`Last Name`, payment.`Payment Date`, payment.`Amount of payment`, YEAR(`Payment Date`) AS `Year of payment`
 FROM payment
 LEFT JOIN ClubMember on payment.MemberId = ClubMember.MemberId
 WHERE payment.MemberId = 10;
 
 
 
+-- Get the sum of membership fees paid and the sum of donations that are collected
+-- by the club in the year 2024.
 
+-- Create a temporary table that will get the domation from each person per year
+
+SELECT Subquery.`Year`,SUM(Subquery.`Total Paid`) as `Total Paid`,  SUM(Subquery.`Donations`) as Donations
+FROM(
+  SELECT MemberId, YEAR(`Payment Date`) as `Year`, SUM(`Amount of payment`) AS `Total Paid`, GREATEST(SUM(`Amount of payment`) - 100, 0) AS Donations
+  FROM Payment
+  GROUP BY MemberId, YEAR(`Payment Date`)) as Subquery
+GROUP BY Subquery.`Year`;
+  
+  
+
+
+
+
+
+
+-- SELECT YEAR(`Payment Date`) AS Year, SUM(`Amount of payment`) AS `Membership fees`
+-- FROM payment
+-- GROUP BY YEAR(`Payment Date`)
 
 
 
