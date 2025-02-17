@@ -212,7 +212,8 @@ WHERE role = 'General Manager'
 
 
 )
-SELECT Locations.Name,Locations.City,Locations.Postal_Code,Locations.Province,Locations.Phone_Number,Locations.Web_Address,Locations.type,
+SELECT Locations.Name,Locations.City,Locations.Postal_Code,
+Locations.Province,Locations.Phone_Number,Locations.Web_Address,Locations.type,
 TABLE1.NUMBER_OF_PERSONNEL,TABLE2.NUMBER_MEMBER,TABLE3.`GENERAL MANAGER FULLNAME`
 FROM Locations
 LEFT JOIN TABLE1 ON Locations.Name = TABLE1.Locations
@@ -248,9 +249,11 @@ FROM ClubMember
 LEFT JOIN TABLE5 ON ClubMember.MemberId = TABLE5.MemberId)
 
 
-SELECT Family_Member.Locations,Family_Member.`First Name`, Family_Member.`Last Name`, count(STATUS) as `ACTIVE CLUB MEMBER`
+SELECT Family_Member.Locations,Family_Member.`First Name`, Family_Member.`Last Name`,
+count(STATUS) as `ACTIVE CLUB MEMBER`
 from Family_Member
 LEFT JOIN TABLE6 ON Family_Member.SIN = TABLE6.`Family member SIN`
+WHERE Family_Member.Locations = 'Winnipeg Warriors'
 GROUP BY Locations,Family_Member.`First Name`, Family_Member.`Last Name`;
 
 
@@ -262,18 +265,8 @@ GROUP BY Locations,Family_Member.`First Name`, Family_Member.`Last Name`;
 -- deputy manager, Coach, etc.) and mandate (Volunteer or Salaried)
 
 
-SELECT Locations,
-`First Name`, 
-`Last Name`, `Date of Birth`,
-SIN,
-`MEDICAR CART NUMBER`,
-Phone_Number,
-Address, City,
-Province,
-Postal_Code,
-email,
-role,
-mandate
+SELECT Locations, `First Name`,  `Last Name`, `Date of Birth`,SIN,`MEDICAR CART NUMBER`,
+Phone_Number,Address, City,Province,Postal_Code,email,role,mandate
 FROM personnel
 WHERE Locations = "Montreal Soccer Club";
 
@@ -313,10 +306,13 @@ ORDER BY Locations,`First Name`, `Age of registration`;
 
 -- We will do for all of them 
 
-SELECT ClubMember.MemberId, ClubMember.`First Name`, ClubMember.`Last Name`, ClubMember.`Date of Birth`, ClubMember.SIN, ClubMember.`MEDICAR CART NUMBER`,
-ClubMember.Phone_Number,ClubMember.address, ClubMember.city, ClubMember.province, ClubMember.Postal_Code, Family_Member.relationship
+SELECT ClubMember.MemberId, ClubMember.`First Name`, ClubMember.`Last Name`, ClubMember.`Date of Birth`, 
+ClubMember.SIN, ClubMember.`MEDICAR CART NUMBER`,
+ClubMember.Phone_Number,ClubMember.address, ClubMember.city, ClubMember.province, ClubMember.Postal_Code, 
+Family_Member.relationship
 FROM Family_Member
-LEFT JOIN ClubMember ON Family_Member.SIN = ClubMember.`Family member SIN`;
+LEFT JOIN ClubMember ON Family_Member.SIN = ClubMember.`Family member SIN`
+WHERE Family_Member.SIN = '345678912';
 
 
 -- For a given location, get the list of all family members who have currently active
@@ -340,7 +336,8 @@ FROM (
     FROM Family_Member
     LEFT JOIN TABLE8 ON Family_Member.SIN = TABLE8.`Family member SIN`
 ) AS SUBQUERY
-INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN;
+INNER JOIN personnel ON SUBQUERY.`Family member SIN` = personnel.SIN
+WHERE SUBQUERY.Locations= 'Montreal Soccer Club';
 
 
 
@@ -387,9 +384,6 @@ SELECT COUNT(*) AS `Count for Payment schema` FROM Payment ;
 
 
 
--- SELECT YEAR(`Payment Date`) AS Year, SUM(`Amount of payment`) AS `Membership fees`
--- FROM payment
--- GROUP BY YEAR(`Payment Date`)
 
 
 
@@ -402,30 +396,3 @@ SELECT COUNT(*) AS `Count for Payment schema` FROM Payment ;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- Create a table with the number of member 
-
--- TABLE2 AS (
--- SELECT Locations,
--- COUNT(*) AS NUMBER_OF_Member
--- FROM ClubMember
--- GROUP BY Locations
--- );
